@@ -675,8 +675,8 @@ local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ki
 local Notify = AkaliNotif.Notify;
 
 Notify({
-Description = "Made By Gabmipapi";
-Title = "Sweat.wtf";
+Description = "Updated By M4rk";
+Title = "M4rk.tzy";
 Duration = 5;
 });
 
