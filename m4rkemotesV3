@@ -363,7 +363,7 @@ local function WaitForChildOfClass(parent, class)
 	return child
 end
  
-local MAX_EMOTES = 500
+local MAX_EMOTES = 600
 
 local params = CatalogSearchParams.new()
 params.AssetTypes = {Enum.AvatarAssetType.EmoteAnimation}
