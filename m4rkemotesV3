@@ -467,17 +467,17 @@ local customEmotes = {
 
 }
 
+-- Step 3: Insert them without ruining the fetched order
+for _, emote in ipairs(customEmotes) do
+    local index = math.clamp(emote.Index, 1, #totalEmotes+1)
+    table.insert(totalEmotes, index, emote)
+end
+
 -- Ensure we never display more than MAX_EMOTES total
 if #totalEmotes > MAX_EMOTES then
     for i = #totalEmotes, MAX_EMOTES + 1, -1 do
         table.remove(totalEmotes, i)
     end
-end
-
--- Step 3: Insert them without ruining the fetched order
-for _, emote in ipairs(customEmotes) do
-    local index = math.clamp(emote.Index, 1, #totalEmotes+1)
-    table.insert(totalEmotes, index, emote)
 end
 
 -- Step 4: Display in final order
