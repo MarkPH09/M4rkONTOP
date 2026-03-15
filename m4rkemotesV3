@@ -362,8 +362,6 @@ local function WaitForChildOfClass(parent, class)
 	end
 	return child
 end
- 
-local MAX_EMOTES = 600
 
 local params = CatalogSearchParams.new()
 params.AssetTypes = {Enum.AvatarAssetType.EmoteAnimation}
@@ -388,21 +386,13 @@ end
 local catalogPage = getCatalogPage()
 
 local pages = {}
-local fetchedEmoteCount = 0
 
 while true do
     local currentPage = catalogPage:GetCurrentPage()
     table.insert(pages, currentPage)
-    fetchedEmoteCount = fetchedEmoteCount + #currentPage
-
-    if fetchedEmoteCount >= MAX_EMOTES then
-        break
-    end
-
     if catalogPage.IsFinished then
         break
     end
-
     local function AdvanceToNextPage()
         local success = pcall(function()
             catalogPage:AdvanceToNextPageAsync()
@@ -412,7 +402,6 @@ while true do
             return AdvanceToNextPage()
         end
     end
-
     AdvanceToNextPage()
 end
 
@@ -474,13 +463,6 @@ local customEmotes = {
 for _, emote in ipairs(customEmotes) do
     local index = math.clamp(emote.Index, 1, #totalEmotes+1)
     table.insert(totalEmotes, index, emote)
-end
-
--- Ensure we never display more than MAX_EMOTES total
-if #totalEmotes > MAX_EMOTES then
-    for i = #totalEmotes, MAX_EMOTES + 1, -1 do
-        table.remove(totalEmotes, i)
-    end
 end
 
 -- Step 4: Display in final order
