@@ -465,14 +465,16 @@ local customEmotes = {
 {Name = "Arm Twist", Id = 9710992846, Price = 50, Index = 97},
 {Name = "Paris Hilton - Sliving For The Groove", Id = 15392927897, Price = 50, Index = 48},
 
+
+
+}
+
 -- Ensure we never display more than MAX_EMOTES total
 if #totalEmotes > MAX_EMOTES then
     for i = #totalEmotes, MAX_EMOTES + 1, -1 do
         table.remove(totalEmotes, i)
     end
 end
-
-}
 
 -- Step 3: Insert them without ruining the fetched order
 for _, emote in ipairs(customEmotes) do
