@@ -117,7 +117,7 @@ local function SortEmotes()
 			continue
 		end
 		local IsFavorited = table.find(FavoritedEmotes, Emote.id)
-		EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + ((IsFavorited and 55) or #Emotes)
+		EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + ((IsFavorited and 0) or #Emotes)
 		EmoteButton.number.Text = Emote.sort[CurrentSort]
 	end
 end
@@ -647,13 +647,12 @@ local function CharacterAdded(Character)
 			if index then
 				table.remove(FavoritedEmotes, index)
 				Favorite.Image = FavoriteOff
-				EmoteButton.LayoutOrder = Emote.sort[CurrentSort] + #Emotes
 			else
 				table.insert(FavoritedEmotes, Emote.id)
 				Favorite.Image = FavoriteOn
-				EmoteButton.LayoutOrder = Emote.sort[CurrentSort]
 			end
 			WriteFileFunc("FavoritedEmotes.txt", HttpService:JSONEncode(FavoritedEmotes))
+			SortEmotes()
 		end)
 	end
 	for i=1,9 do
