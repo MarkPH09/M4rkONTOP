@@ -96,7 +96,7 @@ Grid.Parent = Frame
 local SortFrame = Instance.new("Frame")
 SortFrame.Visible = false
 SortFrame.BorderSizePixel = 1
-SortFrame.Position = UDim2.new(1, 5, -0.125, 0)
+SortFrame.Position = UDim2.new(1, 0, 0.08, 0)
 SortFrame.Size = UDim2.new(0.7, 0, 0, 0)
 SortFrame.AutomaticSize = Enum.AutomaticSize.Y
 SortFrame.BackgroundTransparency = 0.9
@@ -125,12 +125,12 @@ end
 local function createsort(order, text, sort)
 	local CreatedSort = Instance.new("TextButton")
 	CreatedSort.SizeConstraint = Enum.SizeConstraint.RelativeXX
-	CreatedSort.Size = UDim2.new(1, 0, 0.2, 0)
+	CreatedSort.Size = UDim2.new(1, 0, 0.12, 0)
 	CreatedSort.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 	CreatedSort.LayoutOrder = order
 	CreatedSort.TextColor3 = Color3.new(1, 1, 1)
 	CreatedSort.Text = text
-	CreatedSort.TextScaled = true
+	CreatedSort.TextScaled = false
 	CreatedSort.BorderSizePixel = 0
 	Corner:Clone().Parent = CreatedSort
 	CreatedSort.Parent = SortFrame
@@ -152,9 +152,9 @@ createsort(6, "Lowest Price", "lowestprice")
 local SortButton = Instance.new("TextButton")
 SortButton.BorderSizePixel = 0
 SortButton.AnchorPoint = Vector2.new(0.5, 0.5)
-SortButton.Position = UDim2.new(1, -10, -5, 0)
-SortButton.Size = UDim2.new(0.08, 0, 0.04, 0)
-SortButton.TextScaled = true
+SortButton.Position = UDim2.new(1, 0, 0.03, 0)
+SortButton.Size = UDim2.new(0.07, 0, 0.035, 0)
+SortButton.TextScaled = false
 SortButton.TextColor3 = Color3.new(1, 1, 1)
 SortButton.BackgroundColor3 = Color3.new(0, 0, 0)
 SortButton.BackgroundTransparency = 1
@@ -453,6 +453,11 @@ local customEmotes = {
 {Name = "Rise Above - The Chainsmokers", Id = 13071993910, Price = 50, Index = 91},
 {Name = "Arm Twist", Id = 9710992846, Price = 50, Index = 97},
 {Name = "Paris Hilton - Sliving For The Groove", Id = 15392927897, Price = 50, Index = 48},
+{Name = "Dancing with your eyes closed", Id = 129637389787927, Price = 100, Index = 3},
+{Name = "what happened bro", Id = 137987340488409, Price = 29, Index = 38},
+{Name = "Young-hee Head spin - Squid game", Id = 134615135651900, Price = 0, Index = 179},
+{Name = "BURBERRY LOLA ATTITUDE - GEM", Id = 86025464194323, Price = 29, Index = 398},
+{Name = "BURBERRY LOLA ATTITUDE HYDRO", Id = 106733896873517, Price = 29, Index = 419},
 
 
 
