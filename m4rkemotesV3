@@ -11,7 +11,6 @@ local UserInputService = game:GetService("UserInputService")
  
 local Emotes = {}
 local function AddEmote(name: string, id: IntValue, price: IntValue?)
-	if not (name and id) then
 		return
 	end
  
@@ -363,45 +362,57 @@ local function WaitForChildOfClass(parent, class)
 	return child
 end
  
+local MAX_EMOTES = 500
+
 local params = CatalogSearchParams.new()
 params.AssetTypes = {Enum.AvatarAssetType.EmoteAnimation}
 params.SortType = Enum.CatalogSortType.RecentlyCreated
 params.SortAggregation = Enum.CatalogSortAggregation.AllTime
 params.IncludeOffSale = true
-params.CreatorName = "Roblox"
-params.Limit = 120
- 
+-- Remove CreatorName to include UGC and other creator emotes
+-- params.CreatorName = "Roblox"
+params.Limit = 120 -- max page size (Roblox caps this, so we cap overall emotes separately)
+
 local function getCatalogPage()
-	local success, catalogPage = pcall(function()
-		return AvatarEditorService:SearchCatalog(params)
-	end)
-	if not success then
-		task.wait(5)
-		return getCatalogPage()
-	end
-	return catalogPage
+    local success, catalogPage = pcall(function()
+        return AvatarEditorService:SearchCatalog(params)
+    end)
+    if not success then
+        task.wait(5)
+        return getCatalogPage()
+    end
+    return catalogPage
 end
- 
+
 local catalogPage = getCatalogPage()
- 
+
 local pages = {}
- 
+local fetchedEmoteCount = 0
+
 while true do
-	local currentPage = catalogPage:GetCurrentPage()
-	table.insert(pages, currentPage)
-	if catalogPage.IsFinished then
-		break
-	end
-	local function AdvanceToNextPage()
-		local success = pcall(function()
-			catalogPage:AdvanceToNextPageAsync()
-		end)
-		if not success then
-			task.wait(5)
-			return AdvanceToNextPage()
-		end
-	end
-	AdvanceToNextPage()
+    local currentPage = catalogPage:GetCurrentPage()
+    table.insert(pages, currentPage)
+    fetchedEmoteCount = fetchedEmoteCount + #currentPage
+
+    if fetchedEmoteCount >= MAX_EMOTES then
+        break
+    end
+
+    if catalogPage.IsFinished then
+        break
+    end
+
+    local function AdvanceToNextPage()
+        local success = pcall(function()
+            catalogPage:AdvanceToNextPageAsync()
+        end)
+        if not success then
+            task.wait(5)
+            return AdvanceToNextPage()
+        end
+    end
+
+    AdvanceToNextPage()
 end
 
 local totalEmotes = {}
@@ -454,7 +465,12 @@ local customEmotes = {
 {Name = "Arm Twist", Id = 9710992846, Price = 50, Index = 97},
 {Name = "Paris Hilton - Sliving For The Groove", Id = 15392927897, Price = 50, Index = 48},
 
-
+-- Ensure we never display more than MAX_EMOTES total
+if #totalEmotes > MAX_EMOTES then
+    for i = #totalEmotes, MAX_EMOTES + 1, -1 do
+        table.remove(totalEmotes, i)
+    end
+end
 
 }
 
