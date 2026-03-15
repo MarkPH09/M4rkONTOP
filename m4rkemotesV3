@@ -151,9 +151,9 @@ createsort(6, "Lowest Price", "lowestprice")
  
 local SortButton = Instance.new("TextButton")
 SortButton.BorderSizePixel = 0
-SortButton.AnchorPoint = Vector2.new(0.58, 0.82)
-SortButton.Position = UDim2.new(0, 10, -82, 0)
-SortButton.Size = UDim2.new(0.08, 0, 0.04, 0)
+SortButton.AnchorPoint = Vector2.new(0.5, 0.5)
+SortButton.Position = UDim2.new(0.82, 0, -0.055, 0) -- next to search bar
+SortButton.Size = UDim2.new(0.08, 0, 0.05, 0)
 SortButton.TextScaled = true
 SortButton.TextColor3 = Color3.new(1, 1, 1)
 SortButton.BackgroundColor3 = Color3.new(0, 0, 0)
