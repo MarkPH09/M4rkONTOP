@@ -368,6 +368,7 @@ params.AssetTypes = {Enum.AvatarAssetType.EmoteAnimation}
 params.SortType = Enum.CatalogSortType.RecentlyCreated
 params.SortAggregation = Enum.CatalogSortAggregation.AllTime
 params.IncludeOffSale = true
+params.CreatorName = "Roblox"
 params.Limit = 120
  
 local function getCatalogPage()
