@@ -104,7 +104,7 @@ Corner:Clone().Parent = SortFrame
 SortFrame.Parent = BackFrame
  
 local SortList = Instance.new("UIListLayout")
-SortList.Padding = UDim.new(0.07, 1)
+SortList.Padding = UDim.new(0.02, 0)
 SortList.HorizontalAlignment = Enum.HorizontalAlignment.Center
 SortList.VerticalAlignment = Enum.VerticalAlignment.Top
 SortList.SortOrder = Enum.SortOrder.LayoutOrder
@@ -125,7 +125,7 @@ end
 local function createsort(order, text, sort)
 	local CreatedSort = Instance.new("TextButton")
 	CreatedSort.SizeConstraint = Enum.SizeConstraint.RelativeXX
-	CreatedSort.Size = UDim2.new(1, 0, 0.2, 0)
+	CreatedSort.Size = UDim2.new(1, 0, 0.1, 0)
 	CreatedSort.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 	CreatedSort.LayoutOrder = order
 	CreatedSort.TextColor3 = Color3.new(1, 1, 1)
