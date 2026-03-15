@@ -14,7 +14,7 @@ local function AddEmote(name: string, id: IntValue, price: IntValue?)
 	if not (name and id) then
 		return
 	end
-
+ 
 	table.insert(Emotes, {
 		["name"] = name,
 		["id"] = id,
@@ -104,7 +104,7 @@ Corner:Clone().Parent = SortFrame
 SortFrame.Parent = BackFrame
  
 local SortList = Instance.new("UIListLayout")
-SortList.Padding = UDim.new(0.02, 0)
+SortList.Padding = UDim.new(0.07, 1)
 SortList.HorizontalAlignment = Enum.HorizontalAlignment.Center
 SortList.VerticalAlignment = Enum.VerticalAlignment.Top
 SortList.SortOrder = Enum.SortOrder.LayoutOrder
@@ -125,7 +125,7 @@ end
 local function createsort(order, text, sort)
 	local CreatedSort = Instance.new("TextButton")
 	CreatedSort.SizeConstraint = Enum.SizeConstraint.RelativeXX
-	CreatedSort.Size = UDim2.new(1, 0, 0.1, 0)
+	CreatedSort.Size = UDim2.new(1, 0, 0.2, 0)
 	CreatedSort.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 	CreatedSort.LayoutOrder = order
 	CreatedSort.TextColor3 = Color3.new(1, 1, 1)
@@ -152,8 +152,8 @@ createsort(6, "Lowest Price", "lowestprice")
 local SortButton = Instance.new("TextButton")
 SortButton.BorderSizePixel = 0
 SortButton.AnchorPoint = Vector2.new(0.5, 0.5)
-SortButton.Position = UDim2.new(1.12, 0, -0.055, 0) -- moved outside so it doesn't cover emotes
-SortButton.Size = UDim2.new(0.08, 0, 0.05, 0)
+SortButton.Position = UDim2.new(1, -10, -5, 0)
+SortButton.Size = UDim2.new(0.08, 0, 0.04, 0)
 SortButton.TextScaled = true
 SortButton.TextColor3 = Color3.new(1, 1, 1)
 SortButton.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -222,7 +222,7 @@ SearchBar.Parent = BackFrame
 
 
 local MadeByLabel = Instance.new("TextLabel")
-MadeByLabel.Text = "Updated By m4rk.                  M4RKTZY ON FKING TOP"
+MadeByLabel.Text = "Updated By M4rk.                  M4RKTZY ON FKING TOP"
 MadeByLabel.TextScaled = true
 MadeByLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 MadeByLabel.BackgroundTransparency = 0.3
@@ -362,47 +362,46 @@ local function WaitForChildOfClass(parent, class)
 	end
 	return child
 end
-
+ 
 local params = CatalogSearchParams.new()
 params.AssetTypes = {Enum.AvatarAssetType.EmoteAnimation}
 params.SortType = Enum.CatalogSortType.RecentlyCreated
 params.SortAggregation = Enum.CatalogSortAggregation.AllTime
 params.IncludeOffSale = true
--- Remove CreatorName to include UGC and other creator emotes
--- params.CreatorName = "Roblox"
-params.Limit = 120 -- max page size (Roblox caps this, so we cap overall emotes separately)
-
+params.CreatorName = "Roblox"
+params.Limit = 120
+ 
 local function getCatalogPage()
-    local success, catalogPage = pcall(function()
-        return AvatarEditorService:SearchCatalog(params)
-    end)
-    if not success then
-        task.wait(5)
-        return getCatalogPage()
-    end
-    return catalogPage
+	local success, catalogPage = pcall(function()
+		return AvatarEditorService:SearchCatalog(params)
+	end)
+	if not success then
+		task.wait(5)
+		return getCatalogPage()
+	end
+	return catalogPage
 end
-
+ 
 local catalogPage = getCatalogPage()
-
+ 
 local pages = {}
-
+ 
 while true do
-    local currentPage = catalogPage:GetCurrentPage()
-    table.insert(pages, currentPage)
-    if catalogPage.IsFinished then
-        break
-    end
-    local function AdvanceToNextPage()
-        local success = pcall(function()
-            catalogPage:AdvanceToNextPageAsync()
-        end)
-        if not success then
-            task.wait(5)
-            return AdvanceToNextPage()
-        end
-    end
-    AdvanceToNextPage()
+	local currentPage = catalogPage:GetCurrentPage()
+	table.insert(pages, currentPage)
+	if catalogPage.IsFinished then
+		break
+	end
+	local function AdvanceToNextPage()
+		local success = pcall(function()
+			catalogPage:AdvanceToNextPageAsync()
+		end)
+		if not success then
+			task.wait(5)
+			return AdvanceToNextPage()
+		end
+	end
+	AdvanceToNextPage()
 end
 
 local totalEmotes = {}
@@ -676,8 +675,8 @@ local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ki
 local Notify = AkaliNotif.Notify;
 
 Notify({
-Description = "Updated By M4rk";
-Title = "M4rk.tzy";
+Description = "Made By M4rk";
+Title = "m4rt.tzy";
 Duration = 5;
 });
 
