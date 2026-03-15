@@ -11,9 +11,10 @@ local UserInputService = game:GetService("UserInputService")
  
 local Emotes = {}
 local function AddEmote(name: string, id: IntValue, price: IntValue?)
+	if not (name and id) then
 		return
 	end
- 
+
 	table.insert(Emotes, {
 		["name"] = name,
 		["id"] = id,
